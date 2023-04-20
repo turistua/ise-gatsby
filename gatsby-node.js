@@ -28,8 +28,10 @@ exports.createPages = async function ({ actions, graphql }) {
 
       actions.createPage({
         path: slug,
-        component: require.resolve(`./src/templates/landingPage.js`),
-        context: { slug: slug, isSSG: slug === 'main-page' },
+        component: slug === 'main-page' ?
+          require.resolve(`./src/templates/landingPageStatic.js`) :
+          require.resolve(`./src/templates/landingPage.js`),
+        context: { slug: slug },
       })
     })
 
